@@ -5,10 +5,11 @@ import 'package:widget_mask/widget_mask.dart';
 import '../colors.dart';
 import 'StyleSupport.dart';
 
-Widget FeatureImageCard(
-    Feature feature,
-    BuildContext context
-    ){
+Widget FeatureImageCard({
+ required Feature feature,
+ required BuildContext context,
+ bool isReady=false,
+}){
   return
     Stack(
       alignment: AlignmentDirectional.centerEnd,
@@ -43,7 +44,7 @@ Widget FeatureImageCard(
                     ),
                     color: brown,
                   ),
-                  child: InkWell(
+                  child: isReady ? InkWell(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,6 +60,8 @@ Widget FeatureImageCard(
                         ),
                       );
                     },
+                  ) : Center(
+                    child: Text("قريبا",style: TextStyle(color: Colors.white),),
                   ),
                 )
               ],

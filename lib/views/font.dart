@@ -1,6 +1,6 @@
 
 
-double FONT_SIZE = 10;
+double FONT_SIZE = 23;
 double TITLE_FONT_SIZE = 35;
 double H1 = 45;
 double H2 = 37;

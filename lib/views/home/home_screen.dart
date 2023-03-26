@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,17 +33,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             FeatureImageCard(
-                Feature(
+               feature: Feature(
               "قراءة",
               "قراءة القرءان رحلة ملئة بالكنز " + "\nفلا تدع الحسنات تنتضر",
               "إبد الرحلة",
               "assets/images/read_card.png",
               SurahListScreen(),
             ),
-              context
+            context: context,
+              isReady: true
             ),
             FeatureImageCard(
-                Feature(
+                feature: Feature(
                   "تصفح",
                   "انتقل فورا الى الآية التي\n"+
                   "تريد",
@@ -50,49 +52,50 @@ class _HomeScreenState extends State<HomeScreen> {
                   "assets/images/search.png",
                   SearchScreen(),
                 ),
-                context
+                context: context,
+              isReady: true,
             ),
             FeatureImageCard(
-                Feature(
+                feature:Feature(
                   "إستماع",
                   "استمع الى قارئك المفضل" + "\n من اي مكان",
                   "إبد الرحلة",
                   "assets/images/audio.png",
                   Container(),
                 ),
-                context
+                context: context
             ),
             FeatureImageCard(
-                Feature(
+                feature: Feature(
                   "إختبار الحفظ",
                   "شدة الحفظ تأتي من" + "\nالمراجعة و الاختبار",
                   "إبد الرحلة",
                   "assets/images/test.png",
                   Container(),
                 ),
-                context
+                context:context
             ),
             FeatureImageCard(
-                Feature(
+                feature:Feature(
                   "ورد",
                   "قراءة القرءان رحلة ملئة بالكنز" + "\n فلا تدع الحسنات تنتضر",
                   "إبد الرحلة",
                   "assets/images/warada.png",
                   Container(),
                 ),
-                context
+                context:context
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 110.0),
               child: FeatureImageCard(
-                  Feature(
+                  feature:Feature(
                     "أذكار",
                     "قراءة القرءان رحلة ملئة بالكنز " + "\nفلا تدع الحسنات تنتضر",
                     "إبد الرحلة",
                     "assets/images/rmembrance.png",
                     Container(),
                   ),
-                  context
+                  context:context
               ),
             ),
           ],

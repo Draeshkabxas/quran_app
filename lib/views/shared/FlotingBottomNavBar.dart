@@ -47,7 +47,7 @@ class _FlotingBottomNavigationBarState
             children: [
               Expanded(
                   child: FlotingIcon(
-                      iconPath: "assets/svg/woman.svg",
+                      iconPath: "assets/svg/man.svg",
                       index: 0,
                       selectedIndex: selected,
                       onTap: (index) {

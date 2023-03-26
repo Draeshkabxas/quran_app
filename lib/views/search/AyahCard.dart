@@ -41,7 +41,12 @@ Widget AyahCard(
                       Container(
                           width: 170,
                           child: Text(
-                            ayah.ayaText!
+                            ayah.ayaText!,
+                            style: TextStyle(
+                              fontFamily: 'Qaloun',
+                              fontWeight: FontWeight.bold,
+
+                            ),
                           )),
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quran_app/models/QuaranData.dart';
 import 'package:quran_app/models/Surah.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,8 +19,9 @@ class QuranProvider extends ChangeNotifier{
     getData();
   }
 
-  Future<void> getData() async {
-    if(ayahs !=null && surahs != null) return;
+  Future<void> getData({bool isReset=false}) async {
+    if(ayahs !=null && surahs != null && isReset == false) return;
+    print("Riwaya I'm work $RIWAYA");
     await readJson();
     await getSurahs();
     notifyListeners();
@@ -28,7 +30,7 @@ class QuranProvider extends ChangeNotifier{
 
 
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('quran_data/QalounData.json');
+    final String response = await rootBundle.loadString('quran_data/${RIWAYA.name}Data.json');
     final data = await json.decode(response) as List;
     ayahs = data.map((ayah) => Ayah.fromJson(ayah)).toList();
   }
@@ -38,20 +40,19 @@ class QuranProvider extends ChangeNotifier{
   }
 
   Future<void> search(String search) async {
-    String regJustArabic = r'[\0600–\06FF]';
-    RegExp regExp = new RegExp(regJustArabic);
     if(ayahs == null) await getData();
     searchAyahs = [];
     ayahs?.forEach((ayah) {
-      var match= regExp.allMatches(ayah.ayaText!);
-      print("match ${match.first[0]}");
-      if(match.contains(search)){
+      if(removeDiacritics(ayah.ayaText!).contains(search)){
         searchAyahs?.add(ayah);
       }
     });
     notifyListeners();
   }
 
+  String removeDiacritics(String text) {
+    return text.replaceAll(RegExp(r'[^\u0621-\u064A ]'), ''); // Regex matches all diacritic characters except spaces
+  }
 
   Future<void> getSurahs() async {
     surahs =<Surah>[];

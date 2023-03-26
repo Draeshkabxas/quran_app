@@ -3,11 +3,11 @@
 /// page : "1"
 /// sura_no : 1
 /// sura_name_en : "Al-Fātiḥah"
-/// sura_name_ar : "الفَاتِحة "
-/// line_start : 3
-/// line_end : 3
+/// sura_name_ar : "الفَاتِحة"
+/// line_start : 2
+/// line_end : 2
 /// aya_no : 1
-/// aya_text : "اِ۬لْحَمْدُ لِلهِ رَبِّ اِ۬لْعَٰلَمِينَ ﰀ"
+/// aya_text : "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ﰀ"
 
 class Ayah {
   Ayah({
@@ -36,7 +36,7 @@ class Ayah {
   Ayah.fromJson(dynamic json) {
     _id = json['id'];
     _jozz = json['jozz'];
-    _page = json['page'];
+    _page = json['page'].toString();
     _suraNo = json['sura_no'];
     _suraNameEn = json['sura_name_en'];
     _suraNameAr = json['sura_name_ar'];

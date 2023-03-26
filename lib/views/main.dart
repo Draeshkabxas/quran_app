@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
 // Here you can write your code
       SettingsProvider provider=context.read<SettingsProvider>();
       QuranProvider quranProvider=context.read<QuranProvider>();
+      provider.getSharePref();
       provider.getFontSize().then((value) => print("fs $value"));
       quranProvider.getData();
       print("Delay work");

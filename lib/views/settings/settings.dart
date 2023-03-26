@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quran_app/models/QuaranData.dart';
 import 'package:quran_app/providers/QuranProvider.dart';
 import 'package:quran_app/providers/SettingsProvider.dart';
 
@@ -92,16 +95,14 @@ TextStyle settingsHeadersStyle(){
 }
 
 enum Riwayat {
+  Bazzi,
+  Douri,
   Hafs,
-  Warsh,
-  Qalon,
-  AlDouri,
-  AlHarith,
-  AlKisai,
-  Shubas,
+  Qaloun,
   Qunbul,
-  Albizii,
-  Alsuwsi
+  Shuba,
+  Sousi,
+  Warsh,
 }
 
 class Riwayats extends StatefulWidget {
@@ -113,12 +114,14 @@ class Riwayats extends StatefulWidget {
 
 class _RiwayatsState extends State<Riwayats> {
   late SettingsProvider provider;
-  late Riwayat _riwayat = Riwayat.Qalon;
-  Key key=Key(Riwayat.Qalon.toString());
+  late QuranProvider quranProvider;
+  late Riwayat _riwayat = Riwayat.Qaloun;
+  Key key=Key(Riwayat.Qaloun.toString());
   void onRiwayatRadioButtonClicked(Riwayat value){
     setState(() {
       provider.setRiwayat(value);
-      _riwayat = value;
+      quranProvider.getData(isReset: true);
+      _riwayat = RIWAYA;
     });
   }
 
@@ -127,11 +130,13 @@ class _RiwayatsState extends State<Riwayats> {
     super.initState();
     Future.delayed(Duration.zero,() {
       provider= context.read<SettingsProvider>();
+      quranProvider= context.read<QuranProvider>();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _riwayat=RIWAYA;
     return Padding(
       padding: const EdgeInsets.only(top:20.0),
       child: Column(
@@ -140,7 +145,7 @@ class _RiwayatsState extends State<Riwayats> {
           Text("القراءات العشر",style: settingsHeadersStyle(),),
           RiwayatRadioButton(
               key: key,
-              riwayat: Riwayat.Qalon,
+              riwayat: Riwayat.Qaloun,
               selected: _riwayat,
               onChange: (value) {
                 onRiwayatRadioButtonClicked(value);
@@ -161,28 +166,14 @@ class _RiwayatsState extends State<Riwayats> {
               }),
           RiwayatRadioButton(
               title: "رواية الدوري عن أبي عمرو",
-              riwayat: Riwayat.AlDouri,
-              selected: _riwayat,
-              onChange: (value) {
-                onRiwayatRadioButtonClicked(value);
-              }),
-          RiwayatRadioButton(
-              title: "رواية أبي الحارث عن الكسائي",
-              riwayat: Riwayat.AlHarith,
-              selected: _riwayat,
-              onChange: (value) {
-                onRiwayatRadioButtonClicked(value);
-              }),
-          RiwayatRadioButton(
-              title: "رواية الدوري عن الكسائي",
-              riwayat: Riwayat.AlKisai,
+              riwayat: Riwayat.Douri,
               selected: _riwayat,
               onChange: (value) {
                 onRiwayatRadioButtonClicked(value);
               }),
           RiwayatRadioButton(
               title: "رواية شعبة عن عاصم",
-              riwayat: Riwayat.Shubas,
+              riwayat: Riwayat.Shuba,
               selected: _riwayat,
               onChange: (value) {
                 onRiwayatRadioButtonClicked(value);
@@ -196,14 +187,14 @@ class _RiwayatsState extends State<Riwayats> {
               }),
           RiwayatRadioButton(
               title: "رواية البزي عن ابن كثير",
-              riwayat: Riwayat.Albizii,
+              riwayat: Riwayat.Bazzi,
               selected: _riwayat,
               onChange: (value) {
                 onRiwayatRadioButtonClicked(value);
               }),
           RiwayatRadioButton(
               title: "رواية السوسي عن أبي عمرو",
-              riwayat: Riwayat.Alsuwsi,
+              riwayat: Riwayat.Sousi,
               selected: _riwayat,
               onChange: (value) {
                 onRiwayatRadioButtonClicked(value);
